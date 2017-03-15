@@ -1,101 +1,118 @@
-package org.apache.jmeter.assertions;
+package org.apache.jmeter.assertions.gui;
 
-import java.io.IOException;
-import java.io.Serializable;
-
-import com.github.fge.jsonschema.core.report.LogLevel;
-import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.testelement.AbstractTestElement;
+import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import org.apache.jmeter.gui.util.HorizontalPanel;
+import org.apache.jmeter.gui.util.VerticalPanel;
+import org.apache.jmeter.testelement.TestElement;
+import org.apache.jmeter.util.JMeterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.main.JsonSchema;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
-
+import org.apache.jmeter.assertions.JSONSchemaAssertion;
 
 /**
- * This class (JSONSchemaAssertion.java) allows to validate response against a JSON schema.
+ * JSON Schema Assertion component GUI.
  * Created by Denis Krasilnikov (kde-intro) on 06.03.2017.
  *
  */
-public class JSONSchemaAssertion extends AbstractTestElement implements Serializable, Assertion {
-
-    private static final long serialVersionUID = 234L;
-    public static final String FILE_NAME_IS_REQUIRED = "FileName is required";
-    public static final String JSD_FILENAME_KEY = "jsonschema_assertion_filename";
-    private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertion.class);
-
+public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
+    // class attributes
+    private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertionGUI.class);
+    private static final long serialVersionUID = 241L; // See description there https://jmeter.apache.org/api/serialized-form.html
+    private JTextField jsonSchema;
 
     /**
-     * Get assertion result.
-     *
-     * @return
+     * The constructor.
+     */
+    public JSONSchemaAssertionGUI() {
+        init();
+    }
+
+    /**
+     * Returns the label to be shown within the JTree-Component.
      */
     @Override
-    public AssertionResult getResult(SampleResult response) {
-        AssertionResult result = new AssertionResult(getName());       
-
-        String resultData = response.getResponseDataAsString();
-        if (resultData.length() == 0) {
-            return result.setResultForNull();
-        }
-
-        String jsdFileName = getJsdFileName();
-        log.debug("jsonString: {}, jsonFileName: {}", resultData, jsdFileName);
-        if (jsdFileName == null || jsdFileName.length() == 0) {
-            result.setResultForFailure(FILE_NAME_IS_REQUIRED);
-        } else {
-            setSchemaResult(result, resultData, jsdFileName);
-        }
-
-        return result;
+    public String getLabelResource() {
+        return "jsonschema_assertion_title"; //$NON-NLS-1$
     }
-
-    public void setJsdFileName(String jsonSchemaFileName) throws IllegalArgumentException {
-        setProperty(JSD_FILENAME_KEY, jsonSchemaFileName);
-    }
-
-    public String getJsdFileName() {
-        return getPropertyAsString(JSD_FILENAME_KEY);
-    }
-
 
     /**
-     * Set schema result.
-     *
-     * @param result
-     * @param jsonStr
-     * @param jsdFileName
+     * Create Test Element.
      */
-    public void setSchemaResult(AssertionResult result, String jsonStr, String jsdFileName) {
-        try {
-            JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
-            JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
-            JsonSchema schema = factory.getJsonSchema(schemaFile);
-
-            ProcessingReport response = schema.validate(JsonLoader.fromString(jsonStr));
-            if (!response.isSuccess()) {
-                result.setResultForFailure(response.toString());
-            }
-        } catch (ProcessingException e) {
-            if (log.isWarnEnabled()) {
-                log.warn(e.getMessage());
-            }
-
-            result.setFailureMessage(e.getMessage());
-
-            LogLevel level = e.getProcessingMessage().getLogLevel();
-            if ( (level == LogLevel.FATAL) || (level == LogLevel.ERROR) ) {
-                result.setError(true);
-            }
-        } catch (IOException e) {
-            log.warn("IO error", e);
-            result.setResultForFailure(e.getMessage());
-        }
+    @Override
+    public TestElement createTestElement() {
+        log.debug("JSONSchemaAssertionGui.createTestElement() called");
+        JSONSchemaAssertion el = new JSONSchemaAssertion();
+        modifyTestElement(el);
+        return el;
     }
 
+    /**
+     * Modifies a given TestElement to mirror the data in the gui components.
+     *
+     * @see org.apache.jmeter.gui.JMeterGUIComponent#modifyTestElement(TestElement).
+     */
+    @Override
+    public void modifyTestElement(TestElement inElement) {
+        log.debug("JSONSchemaAssertionGui.modifyTestElement() called");
+        configureTestElement(inElement);
+        ((JSONSchemaAssertion) inElement).setJsdFileName(jsonSchema.getText());
+    }
+
+    /**
+     * Implements JMeterGUIComponent.clearGui.
+     */
+    @Override
+    public void clearGui() {
+        super.clearGui();
+
+        jsonSchema.setText(""); //$NON-NLS-1$
+    }
+
+    /**
+     * Configures the GUI from the associated test element.
+     *
+     * @param el -
+     *            the test element (should be JSONSchemaAssertion).
+     */
+    @Override
+    public void configure(TestElement el) {
+        super.configure(el);
+        JSONSchemaAssertion assertion = (JSONSchemaAssertion) el;
+        jsonSchema.setText(assertion.getJsdFileName());
+    }
+
+    /**
+     * Inits GUI.
+     */
+    private void init() {
+        setLayout(new BorderLayout(0, 10));
+        setBorder(makeBorder());
+
+        add(makeTitlePanel(), BorderLayout.NORTH);
+
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // USER_INPUT
+        VerticalPanel assertionPanel = new VerticalPanel();
+        assertionPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                "JSON Schema"));
+
+        // doctype
+        HorizontalPanel jsonSchemaPanel = new HorizontalPanel();
+
+        jsonSchemaPanel.add(new JLabel(JMeterUtils.getResString(
+                "jsonschema_assertion_label"))); //$NON-NLS-1$
+
+        jsonSchema = new JTextField(26);
+        jsonSchemaPanel.add(jsonSchema);
+
+        assertionPanel.add(jsonSchemaPanel);
+
+        mainPanel.add(assertionPanel, BorderLayout.NORTH);
+        add(mainPanel, BorderLayout.CENTER);
+    }
 }

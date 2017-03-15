@@ -1,6 +1,6 @@
 # JSON Schema Assertion component for Apache JMeter
 
-This component allows the user to validate a response against a JSON Schema.
+This component allows the user to validate a response against an JSON Schema.
 
 ![Screenshot for Control-Panel of JSON Schema Assertion](/JSONSchemaAssertion.png)
 

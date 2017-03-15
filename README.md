@@ -14,7 +14,7 @@ _File Name_ | Specify JSON Schema File Name. | Yes
 
 ## Installation
 
-_(jmeter.version = 3.2-SNAPSHOT)_
+_(jmeter.version: 3.2-SNAPSHOT)_
 
 - Download / Pull JMeter source
 - Put the java files (JSONSchemaAssertionGUI.java, JSONSchemaAssertion.java) into the corresponding packages

@@ -4,14 +4,15 @@ This component allows the user to validate a response against a JSON Schema.
 
 ![Screenshot for Control-Panel of JSON Schema Assertion](/JSONSchemaAssertion.png)
 
-**Parameters**
+### Parameters
 
 Attribute | Description | Required
 ------------ | ------------- | -------------
 Name | Descriptive name for this element that is shown in the tree. | 
 File Name | Specify JSON Schema File Name. | Yes
 
-### Installation
+
+## Installation
 
 _(jmeter.version = 3.2-SNAPSHOT)_
 
@@ -192,18 +193,31 @@ rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 ```
 5. Run ant task download_jars or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 
-### Notes
+
+## Notes
 
 - _build.parameters_ has already contain the library rhino but its version is 1.7.7.1
 
 
-### Changelog
+## Changelog
 
 ...
 
-### Tasks List
+
+## Tasks List
 - [ ] Create Maven version (plugin)
 
-### Roadmap
+
+## Roadmap
+
+...
+
+
+## Troubleshooting
+
+...
+
+
+## Support
 
 ...

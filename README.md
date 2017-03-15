@@ -197,7 +197,6 @@ rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 ## Notes
 
 - _build.parameters_ has already contain the library rhino but its version is 1.7.7.1
-- Add JSONSchemaAssertionTest.java
 
 ## Changelog
 
@@ -206,6 +205,7 @@ rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 
 ## Tasks List
 - [ ] Create Maven version (plugin)
+- [ ] Add test class JSONSchemaAssertionTest
 
 
 ## Roadmap

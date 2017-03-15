@@ -18,7 +18,7 @@ import com.github.fge.jsonschema.main.JsonSchemaFactory;
 
 
 /**
- * This class (JSONSchemaAssertion.java) allows to validate response against a JSON schema.
+ * This class (JSONSchemaAssertion.java) allows to validate a response against an JSON Schema.
  * Created by Denis Krasilnikov (kde-intro) on 06.03.2017.
  *
  */

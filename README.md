@@ -191,13 +191,14 @@ rhino2.jar      = rhino-${rhino2.version}.jar
 rhino2.loc      = ${c.maven2.repo}/org/mozilla/rhino/${rhino2.version}
 rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 ```
-- Run ant task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
+- Run _Ant_ task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 - Compile JMeter application
 
 
 ## Notes
 
-- The file _build.parameters_ contains the library _rhino_ already but its version is _1.7.7.1_
+- The file _build.parameters_ contains the library _rhino_ already but its version is _1.7.7.1_.
+- This assertion are costly and avoid using its during load tests.
 
 
 ## Tasks List

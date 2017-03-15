@@ -23,7 +23,7 @@ _(jmeter.version: 3.2-SNAPSHOT)_
    jsonschema_assertion_label=File Name:
    jsonschema_assertion_title=JSON Schema Assertion
 ```
-- Append the lines to the file _build.xml_ into ``` <path id="classpath"> ``` tag
+- Append the lines to the file _build.xml_ as the subelements to ``` <path id="classpath"> ```
 ```xml
 <pathelement location="${lib.dir}/${msg-simple.jar}"/>
 <pathelement location="${lib.dir}/${uri-template.jar}"/>
@@ -43,7 +43,7 @@ _(jmeter.version: 3.2-SNAPSHOT)_
 <pathelement location="${lib.dir}/${json-schema-validator.jar}"/>
 <pathelement location="${lib.dir}/${btf.jar}"/>
 ```
-- Append the lines to the file _build.xml_ into ``` <target name="_process_all_jars"> ``` tag
+- Append the lines to the file _build.xml_ as the subelements to ``` <target name="_process_all_jars"> ```
 ```xml
 <process_jarfile jarname="msg-simple"/>
 <process_jarfile jarname="uri-template"/>
@@ -63,7 +63,7 @@ _(jmeter.version: 3.2-SNAPSHOT)_
 <process_jarfile jarname="json-schema-validator"/>
 <process_jarfile jarname="btf"/>
 ```
-- Append the lines to the file _build.xml_ into ``` <patternset id="external.jars"> ``` tag
+- Append the lines to the file _build.xml_ as the subelements to ``` <patternset id="external.jars"> ```
  ```xml
 <include name="${lib.dir}/${msg-simple.jar}"/>
 <include name="${lib.dir}/${uri-template.jar}"/>
@@ -212,9 +212,10 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 - Run ant task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 - Compile JMeter application
 
+
 ## Notes
 
-- _build.parameters_ has already contain the library rhino but its version is 1.7.7.1
+- The file _build.parameters_ contains the library _rhino_ already but its version is _1.7.7.1_
 
 
 ## Tasks List
@@ -224,19 +225,15 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 
 ## Changelog
 
-...
 
 
 ## Roadmap
 
-...
 
 
 ## Troubleshooting
 
-...
 
 
 ## Support
 
-...

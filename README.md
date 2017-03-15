@@ -191,7 +191,7 @@ rhino2.jar		= rhino-${rhino2.version}.jar
 rhino2.loc		= ${c.maven2.repo}/org/mozilla/rhino/${rhino2.version}
 rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 ```
-5. Run ant task download_jars or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
+- Run ant task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 
 
 ## Notes

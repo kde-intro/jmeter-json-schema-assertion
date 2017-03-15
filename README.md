@@ -16,68 +16,72 @@ File Name | Specify JSON Schema File Name. | Yes
 _(jmeter.version = 3.2-SNAPSHOT)_
 
 - Download / Pull JMeter source
+- Put the java files (JSONSchemaAssertionGUI.java, JSONSchemaAssertion.java) into the corresponding packages
 - Append the lines to the file _messages.properties_
-- Append the lines to the file _build.xml_
-   - into ``` <path id="classpath"> ``` add
-```xml
-    <pathelement location="${lib.dir}/${msg-simple.jar}"/>
-    <pathelement location="${lib.dir}/${uri-template.jar}"/>
-    <pathelement location="${lib.dir}/${jsr305.jar}"/>
-    <pathelement location="${lib.dir}/${guava.jar}"/>
-    <pathelement location="${lib.dir}/${libphonenumber.jar}"/>
-    <pathelement location="${lib.dir}/${activation.jar}"/>
-    <pathelement location="${lib.dir}/${mailapi.jar}"/>
-    <pathelement location="${lib.dir}/${joda-time.jar}"/>
-    <pathelement location="${lib.dir}/${jopt-simple.jar}"/>
-    <pathelement location="${lib.dir}/${rhino2.jar}"/>
-    <pathelement location="${lib.dir}/${jackson-core.jar}"/>
-    <pathelement location="${lib.dir}/${jackson-databind.jar}"/>
-    <pathelement location="${lib.dir}/${jackson-annotations.jar}"/>
-    <pathelement location="${lib.dir}/${jackson-coreutils.jar}"/>
-    <pathelement location="${lib.dir}/${json-schema-core.jar}"/>
-    <pathelement location="${lib.dir}/${json-schema-validator.jar}"/>
-    <pathelement location="${lib.dir}/${btf.jar}"/>
 ```
-   - into ``` <target name="_process_all_jars"> ``` add
+   jsonschema_assertion_label=File Name:
+   jsonschema_assertion_title=JSON Schema Assertion
+```
+- Append the lines to the file _build.xml_ into ``` <path id="classpath"> ``` tag
 ```xml
-    <process_jarfile jarname="msg-simple"/>
-    <process_jarfile jarname="uri-template"/>
-    <process_jarfile jarname="jsr305"/>
-    <process_jarfile jarname="guava"/>
-    <process_jarfile jarname="libphonenumber"/>
-    <process_jarfile jarname="activation"/>
-    <process_jarfile jarname="mailapi"/>
-    <process_jarfile jarname="joda-time"/>
-    <process_jarfile jarname="jopt-simple"/>
-    <process_jarfile jarname="rhino2"/>
-    <process_jarfile jarname="jackson-core"/>
-    <process_jarfile jarname="jackson-databind"/>
-    <process_jarfile jarname="jackson-annotations"/>
-    <process_jarfile jarname="jackson-coreutils"/>
-    <process_jarfile jarname="json-schema-core"/>
-    <process_jarfile jarname="json-schema-validator"/>
-    <process_jarfile jarname="btf"/>     
-```    
-   - into ``` <patternset id="external.jars"> ``` add
+<pathelement location="${lib.dir}/${msg-simple.jar}"/>
+<pathelement location="${lib.dir}/${uri-template.jar}"/>
+<pathelement location="${lib.dir}/${jsr305.jar}"/>
+<pathelement location="${lib.dir}/${guava.jar}"/>
+<pathelement location="${lib.dir}/${libphonenumber.jar}"/>
+<pathelement location="${lib.dir}/${activation.jar}"/>
+<pathelement location="${lib.dir}/${mailapi.jar}"/>
+<pathelement location="${lib.dir}/${joda-time.jar}"/>
+<pathelement location="${lib.dir}/${jopt-simple.jar}"/>
+<pathelement location="${lib.dir}/${rhino2.jar}"/>
+<pathelement location="${lib.dir}/${jackson-core.jar}"/>
+<pathelement location="${lib.dir}/${jackson-databind.jar}"/>
+<pathelement location="${lib.dir}/${jackson-annotations.jar}"/>
+<pathelement location="${lib.dir}/${jackson-coreutils.jar}"/>
+<pathelement location="${lib.dir}/${json-schema-core.jar}"/>
+<pathelement location="${lib.dir}/${json-schema-validator.jar}"/>
+<pathelement location="${lib.dir}/${btf.jar}"/>
+```
+- Append the lines to the file _build.xml_ into ``` <target name="_process_all_jars"> ``` tag
+```xml
+<process_jarfile jarname="msg-simple"/>
+<process_jarfile jarname="uri-template"/>
+<process_jarfile jarname="jsr305"/>
+<process_jarfile jarname="guava"/>
+<process_jarfile jarname="libphonenumber"/>
+<process_jarfile jarname="activation"/>
+<process_jarfile jarname="mailapi"/>
+<process_jarfile jarname="joda-time"/>
+<process_jarfile jarname="jopt-simple"/>
+<process_jarfile jarname="rhino2"/>
+<process_jarfile jarname="jackson-core"/>
+<process_jarfile jarname="jackson-databind"/>
+<process_jarfile jarname="jackson-annotations"/>
+<process_jarfile jarname="jackson-coreutils"/>
+<process_jarfile jarname="json-schema-core"/>
+<process_jarfile jarname="json-schema-validator"/>
+<process_jarfile jarname="btf"/>
+```
+- Append the lines to the file _build.xml_ into ``` <patternset id="external.jars"> ``` tag
  ```xml
-    <include name="${lib.dir}/${msg-simple.jar}"/>
-    <include name="${lib.dir}/${uri-template.jar}"/>
-    <include name="${lib.dir}/${jsr305.jar}"/>
-    <include name="${lib.dir}/${guava.jar}"/>
-    <include name="${lib.dir}/${libphonenumber.jar}"/>
-    <include name="${lib.dir}/${activation.jar}"/>
-    <include name="${lib.dir}/${mailapi.jar}"/>
-    <include name="${lib.dir}/${joda-time.jar}"/>
-    <include name="${lib.dir}/${jopt-simple.jar}"/>
-    <include name="${lib.dir}/${rhino2.jar}"/>
-    <include name="${lib.dir}/${jackson-core.jar}"/>
-    <include name="${lib.dir}/${jackson-databind.jar}"/>
-    <include name="${lib.dir}/${jackson-annotations.jar}"/>
-    <include name="${lib.dir}/${jackson-coreutils.jar}"/>
-    <include name="${lib.dir}/${json-schema-core.jar}"/>
-    <include name="${lib.dir}/${json-schema-validator.jar}"/>
-    <include name="${lib.dir}/${btf.jar}"/>
-```    
+<include name="${lib.dir}/${msg-simple.jar}"/>
+<include name="${lib.dir}/${uri-template.jar}"/>
+<include name="${lib.dir}/${jsr305.jar}"/>
+<include name="${lib.dir}/${guava.jar}"/>
+<include name="${lib.dir}/${libphonenumber.jar}"/>
+<include name="${lib.dir}/${activation.jar}"/>
+<include name="${lib.dir}/${mailapi.jar}"/>
+<include name="${lib.dir}/${joda-time.jar}"/>
+<include name="${lib.dir}/${jopt-simple.jar}"/>
+<include name="${lib.dir}/${rhino2.jar}"/>
+<include name="${lib.dir}/${jackson-core.jar}"/>
+<include name="${lib.dir}/${jackson-databind.jar}"/>
+<include name="${lib.dir}/${jackson-annotations.jar}"/>
+<include name="${lib.dir}/${jackson-coreutils.jar}"/>
+<include name="${lib.dir}/${json-schema-core.jar}"/>
+<include name="${lib.dir}/${json-schema-validator.jar}"/>
+<include name="${lib.dir}/${btf.jar}"/>
+```
 - Append the lines to the file _build.properties_
 ```
 #For JSON Schema Assertion component
@@ -186,7 +190,7 @@ rhino2.jar		= rhino-${rhino2.version}.jar
 rhino2.loc		= ${c.maven2.repo}/org/mozilla/rhino/${rhino2.version}
 rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 ```
-- Run ant task download_jars or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
+5. Run ant task download_jars or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 
 ### Notes
 

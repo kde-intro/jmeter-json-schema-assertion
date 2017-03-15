@@ -198,14 +198,15 @@ rhino2.md5		= 3850097fb5c9aa1065cc198f1b82dcf1
 
 - _build.parameters_ has already contain the library rhino but its version is 1.7.7.1
 
-## Changelog
-
-...
-
 
 ## Tasks List
 - [ ] Create Maven version (plugin)
 - [ ] Add test class JSONSchemaAssertionTest
+
+
+## Changelog
+
+...
 
 
 ## Roadmap

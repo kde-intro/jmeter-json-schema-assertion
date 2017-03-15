@@ -105,24 +105,6 @@ _(jmeter.version: 3.2-SNAPSHOT)_
 #http://central.maven.org/maven2/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar
 
 c.maven2.repo  = http://central.maven.org/maven2
-# For JSON Schema Assertion component
-# http://central.maven.org/maven2/com/github/fge/json-schema-validator/2.2.6/json-schema-validator-2.2.6.jar
-# http://central.maven.org/maven2/com/github/fge/json-schema-core/1.2.5/json-schema-core-1.2.5.jar
-# http://central.maven.org/maven2/com/github/fge/jackson-coreutils/1.8/jackson-coreutils-1.8.jar
-# http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.2.3/jackson-databind-2.2.3.jar
-# http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.2.3/jackson-core-2.2.3.jar
-# http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.2.3/jackson-annotations-2.2.3.jar
-# http://central.maven.org/maven2/com/github/fge/btf/1.2/btf-1.2.jar
-# http://central.maven.org/maven2/com/github/fge/msg-simple/1.1/msg-simple-1.1.jar
-# http://central.maven.org/maven2/com/github/fge/uri-template/0.9/uri-template-0.9.jar
-# http://central.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.jar
-# http://central.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1.jar
-# http://central.maven.org/maven2/com/googlecode/libphonenumber/libphonenumber/6.2/libphonenumber-6.2.jar
-# http://central.maven.org/maven2/javax/activation/activation/1.1/activation-1.1.jar
-# http://central.maven.org/maven2/javax/mail/mailapi/1.4.3/mailapi-1.4.3.jar
-# http://central.maven.org/maven2/joda-time/joda-time/2.3/joda-time-2.3.jar
-# http://central.maven.org/maven2/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar
-# http://central.maven.org/maven2/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar
 
 json-schema-validator.version   = 2.2.6
 json-schema-validator.jar       = json-schema-validator-${json-schema-validator.version}.jar

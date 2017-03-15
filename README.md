@@ -8,8 +8,8 @@ This component allows the user to validate a response against a JSON Schema.
 
 Attribute | Description | Required
 ------------ | ------------- | -------------
-Name | Descriptive name for this element that is shown in the tree. | 
-File Name | Specify JSON Schema File Name. | Yes
+_Name_ | Descriptive name for this element that is shown in the tree. | No
+_File Name_ | Specify JSON Schema File Name. | Yes
 
 
 ## Installation

@@ -1,26 +1,23 @@
 package org.apache.jmeter.assertions;
 
-import java.io.IOException;
-import java.io.Serializable;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.github.fge.jackson.JsonLoader;
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.LogLevel;
+import com.github.fge.jsonschema.core.report.ProcessingReport;
+import com.github.fge.jsonschema.main.JsonSchema;
+import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.testelement.AbstractTestElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.main.JsonSchema;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
+import java.io.IOException;
+import java.io.Serializable;
 
 
 /**
  * This class (JSONSchemaAssertion.java) allows to validate a response against an JSON Schema.
- * Created by Denis Krasilnikov (kde-intro) on 06.03.2017.
- *
  */
 public class JSONSchemaAssertion extends AbstractTestElement implements Serializable, Assertion {
 
@@ -32,8 +29,6 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
 
     /**
      * Get assertion result.
-     *
-     * @return
      */
     @Override
     public AssertionResult getResult(SampleResult response) {
@@ -65,21 +60,33 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
 
 
     /**
-     * Set schema result.
-     *
-     * @param result
-     * @param jsonStr
-     * @param jsdFileName
+     * Set validation result.
      */
     public void setSchemaResult(AssertionResult result, String jsonStr, String jsdFileName) {
         try {
+            /* IO error 'Unexpected character' can be returned for a schema in case of blank schema (failure)
+                and response in cases of trailing comma (error - the JSON specification does not allow a trailing comma)
+                */
+            JsonSchema schema;
             JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
-            JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
-            JsonSchema schema = factory.getJsonSchema(schemaFile);
 
-            ProcessingReport response = schema.validate(JsonLoader.fromString(jsonStr));
-            if (!response.isSuccess()) {
-                result.setResultForFailure(response.toString());
+            JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
+            JsonNode response = JsonLoader.fromString(jsonStr);
+
+            schema = factory.getJsonSchema(schemaFile);
+            ProcessingReport report = schema.validate(response);
+            if (!report.isSuccess()) {
+                result.setFailureMessage(response.toString());
+                result.setError(true);
+            } // If response.isSuccess() then json schema validation is Ok.
+        } catch (IOException e) {
+            log.warn("IO error", e);
+            result.setFailureMessage(e.getMessage());
+            
+            if (( e.getMessage().indexOf("no JSON Text to read from input") >= 0 ) || ( e.getMessage().indexOf("input has trailing data after first JSON Text") >=0 ) || ( e.getMessage().indexOf("Unexpected character") >= 0 )) {
+                result.setError(true);
+            } else {
+                result.setFailure(true);
             }
         } catch (ProcessingException e) {
             if (log.isWarnEnabled()) {
@@ -87,14 +94,18 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
             }
 
             result.setFailureMessage(e.getMessage());
-
             LogLevel level = e.getProcessingMessage().getLogLevel();
-            if ( (level == LogLevel.FATAL) || (level == LogLevel.ERROR) ) {
+
+            if (level == LogLevel.ERROR) {
                 result.setError(true);
             }
-        } catch (IOException e) {
-            log.warn("IO error", e);
-            result.setResultForFailure(e.getMessage());
+            if (level == LogLevel.FATAL) {
+                result.setFailure(true);
+            }
+            if (!result.isError() && !result.isFailure()) {
+                result.setFailure(true);
+                result.setFailureMessage("Something went wrong or something strange happened: " + e.getMessage());
+            }
         }
     }
 

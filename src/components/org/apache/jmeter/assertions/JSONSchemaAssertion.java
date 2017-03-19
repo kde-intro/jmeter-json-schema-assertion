@@ -64,9 +64,6 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
      */
     public void setSchemaResult(AssertionResult result, String jsonStr, String jsdFileName) {
         try {
-            /* IO error 'Unexpected character' can be returned for a schema in case of blank schema (failure)
-                and response in cases of trailing comma (error - the JSON specification does not allow a trailing comma)
-                */
             JsonSchema schema;
             JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
 

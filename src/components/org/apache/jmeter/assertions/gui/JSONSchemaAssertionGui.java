@@ -1,38 +1,30 @@
 package org.apache.jmeter.assertions.gui;
 
-import java.awt.BorderLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import org.apache.jmeter.assertions.JSONSchemaAssertion;
 import org.apache.jmeter.gui.util.HorizontalPanel;
 import org.apache.jmeter.gui.util.VerticalPanel;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.util.JMeterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.jmeter.assertions.JSONSchemaAssertion;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * JSON Schema Assertion component GUI.
- * Created by Denis Krasilnikov (kde-intro) on 06.03.2017.
- *
  */
-public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
-    // class attributes
-    private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertionGUI.class);
+public class JSONSchemaAssertionGui extends AbstractAssertionGui {
+    private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertionGui.class);
     private static final long serialVersionUID = 241L; // See description there https://jmeter.apache.org/api/serialized-form.html
     private JTextField jsonSchema;
 
-    /**
-     * The constructor.
-     */
-    public JSONSchemaAssertionGUI() {
+    public JSONSchemaAssertionGui() {
         init();
     }
 
     /**
-     * Returns the label to be shown within the JTree-Component.
+     * Return the label to be shown within the JTree-Component.
      */
     @Override
     public String getLabelResource() {
@@ -51,7 +43,7 @@ public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
     }
 
     /**
-     * Modifies a given TestElement to mirror the data in the gui components.
+     * Modify a given TestElement to mirror the data in the gui components.
      *
      * @see org.apache.jmeter.gui.JMeterGUIComponent#modifyTestElement(TestElement).
      */
@@ -63,7 +55,7 @@ public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
     }
 
     /**
-     * Implements JMeterGUIComponent.clearGui.
+     * Implement JMeterGUIComponent.clearGui.
      */
     @Override
     public void clearGui() {
@@ -73,7 +65,7 @@ public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
     }
 
     /**
-     * Configures the GUI from the associated test element.
+     * Configure the GUI from the associated test element.
      *
      * @param el -
      *            the test element (should be JSONSchemaAssertion).
@@ -86,7 +78,7 @@ public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
     }
 
     /**
-     * Inits GUI.
+     * Initialize the GUI.
      */
     private void init() {
         setLayout(new BorderLayout(0, 10));
@@ -101,7 +93,7 @@ public class JSONSchemaAssertionGUI extends AbstractAssertionGui {
         assertionPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
                 "JSON Schema"));
 
-        // doctype
+        // Doctype
         HorizontalPanel jsonSchemaPanel = new HorizontalPanel();
 
         jsonSchemaPanel.add(new JLabel(JMeterUtils.getResString(

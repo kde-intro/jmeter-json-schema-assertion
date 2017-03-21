@@ -189,7 +189,7 @@ rhino2.jar      = rhino-${rhino2.version}.jar
 rhino2.loc      = ${maven2.repo}/org/mozilla/rhino/${rhino2.version}
 rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 ```
-- Run _Ant_ task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
+- Run Ant task _download_jars_ or download the neccessary jars manually (see the links above in the previous point) and put them into _lib_ folder
 - (optional) Append the lines to the file _/res/maven/ApacheJMeter_parent.pom_ as the subelements to ``` <properties> ```
 ```xml
 <json-schema-validator.version>2.2.6</json-schema-validator.version>
@@ -257,7 +257,7 @@ static final String FILEVERSION = "672a997ce15720edd5ac94b288fd19f80202e4d3";
 
 
 ## Tasks List
-- [ ] Create Maven version (plugin)
+- [x] Create Maven version (plugin)
 - [x] Add test class JSONSchemaAssertionTest
 - [ ] Resolve issues
 - [ ] Add flag schema/response

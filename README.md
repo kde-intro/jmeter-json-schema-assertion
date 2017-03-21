@@ -264,9 +264,9 @@ static final String FILEVERSION = "672a997ce15720edd5ac94b288fd19f80202e4d3";
 ## Tasks List
 - [x] Create Maven version (plugin)
 - [x] Add test class JSONSchemaAssertionTest
-- [ ] Resolve issues
+- [ ] Resolve (two) issues
 - [ ] Add flag schema/response
-
+- [ ] Add textarea for JSON Schema
 
 ## Changelog
 

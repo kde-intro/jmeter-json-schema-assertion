@@ -245,12 +245,12 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 ```
 - (optional) Append the lines to the file _/bin/saveservice.properties_
 ```
-JSONSchemaAssertion=org.apache.jmeter.assertions.JSONSchemaAssertion
-JSONSchemaAssertionGui=org.apache.jmeter.assertions.gui.JSONSchemaAssertionGui
+   JSONSchemaAssertion=org.apache.jmeter.assertions.JSONSchemaAssertion
+   JSONSchemaAssertionGui=org.apache.jmeter.assertions.gui.JSONSchemaAssertionGui
 ```
 - (optional) Calculate new sha1 hash without newline of _/bin/saveservice.properties_ and paste it instead of the current value in _/src/core/org/apache/jmeter/save/SaveService.java_ at the line
 ```java
-static final String FILEVERSION = "672a997ce15720edd5ac94b288fd19f80202e4d3";
+   static final String FILEVERSION = "672a997ce15720edd5ac94b288fd19f80202e4d3";
 ```
 - Compile JMeter application
 
@@ -266,7 +266,7 @@ static final String FILEVERSION = "672a997ce15720edd5ac94b288fd19f80202e4d3";
 - [x] Add test class JSONSchemaAssertionTest
 - [ ] Resolve (two) issues
 - [ ] Add flag schema/response
-- [ ] Add textarea for JSON Schema
+- [ ] Add textarea for an schema
 
 ## Changelog
 

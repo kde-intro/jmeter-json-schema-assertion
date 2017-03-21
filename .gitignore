@@ -1,4 +1,5 @@
 /jmeter.log
+/jmeter-server.log
 /target/
 /.idea/
 /out/

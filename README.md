@@ -23,6 +23,11 @@ _(jmeter.version: 3.2-SNAPSHOT)_
    jsonschema_assertion_label=File Name:
    jsonschema_assertion_title=JSON Schema Assertion
 ```
+- Append the lines to the file _messages_fr.properties_
+```
+   jsonschema_assertion_label=Nom de fichier \: 
+   jsonschema_assertion_title=Assertion Sch\u00E9ma JSON
+```
 - Append the lines to the file _build.xml_ as the subelements to ``` <path id="classpath"> ```
 ```xml
 <pathelement location="${lib.dir}/${msg-simple.jar}"/>

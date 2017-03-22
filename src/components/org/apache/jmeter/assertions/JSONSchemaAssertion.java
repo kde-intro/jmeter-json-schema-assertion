@@ -25,6 +25,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
     public static final String FILE_NAME_IS_REQUIRED = "FileName is required";
     public static final String JSD_FILENAME_KEY = "jsonschema_assertion_filename";
     private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertion.class);
+    private String errObj = null;
 
 
     /**
@@ -64,22 +65,27 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
      */
     public void setSchemaResult(AssertionResult result, String jsonStr, String jsdFileName) {
         try {
+            /* IO error 'Unexpected character' can be returned for a schema in case of blank schema (failure)
+                and response in cases of trailing comma (error - the JSON specification does not allow a trailing comma)
+                */
             JsonSchema schema;
             JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
 
-            JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
+            errObj = "(responce) ";
             JsonNode response = JsonLoader.fromString(jsonStr);
-
+            errObj = "(schema) ";
+            JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
             schema = factory.getJsonSchema(schemaFile);
+            errObj = null;
             ProcessingReport report = schema.validate(response);
             if (!report.isSuccess()) {
-                result.setFailureMessage(response.toString());
+                result.setFailureMessage(report.toString());
                 result.setError(true);
             } // If response.isSuccess() then json schema validation is Ok.
         } catch (IOException e) {
             log.warn("IO error", e);
-            result.setFailureMessage(e.getMessage());
-            
+            result.setFailureMessage( errObj == null ? "" : errObj + e.getMessage() );
+
             if (( e.getMessage().indexOf("no JSON Text to read from input") >= 0 ) || ( e.getMessage().indexOf("input has trailing data after first JSON Text") >=0 ) || ( e.getMessage().indexOf("Unexpected character") >= 0 )) {
                 result.setError(true);
             } else {
@@ -90,7 +96,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
                 log.warn(e.getMessage());
             }
 
-            result.setFailureMessage(e.getMessage());
+            result.setFailureMessage(errObj == null ? "" : errObj + e.getMessage());
             LogLevel level = e.getProcessingMessage().getLogLevel();
 
             if (level == LogLevel.ERROR) {

@@ -259,6 +259,7 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 
 - The file _build.parameters_ contains the library _rhino_ already but its version is _1.7.7.1_.
 - This assertion are costly and avoid using its during load tests.
+- This product includes https://github.com/daveclayton/json-schema-validator (LGPLv3 (or later), ASL 2.0).
 
 
 ## Tasks List

@@ -262,7 +262,7 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 - [x] Create Maven version (plugin)
 - [x] Add test class JSONSchemaAssertionTest
 - [ ] Resolve (two) issues
-- [ ] Add flag schema/response
+- [x] Add flag schema/response
 - [ ] Add textarea for a schema
 
 ## Changelog

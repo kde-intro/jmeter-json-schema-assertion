@@ -25,7 +25,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
     public static final String FILE_NAME_IS_REQUIRED = "FileName is required";
     public static final String JSD_FILENAME_KEY = "jsonschema_assertion_filename";
     private static final Logger log = LoggerFactory.getLogger(JSONSchemaAssertion.class);
-    private String errObj = null;
+    private String errObj = "";
 
 
     /**
@@ -76,7 +76,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
             errObj = "(schema) ";
             JsonNode schemaFile = JsonLoader.fromPath(jsdFileName);
             schema = factory.getJsonSchema(schemaFile);
-            errObj = null;
+            errObj = "";
             ProcessingReport report = schema.validate(response);
             if (!report.isSuccess()) {
                 result.setFailureMessage(report.toString());
@@ -84,7 +84,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
             } // If response.isSuccess() then json schema validation is Ok.
         } catch (IOException e) {
             log.warn("IO error", e);
-            result.setFailureMessage( errObj == null ? "" : errObj + e.getMessage() );
+            result.setFailureMessage(errObj + e.getMessage());
 
             if (( e.getMessage().indexOf("no JSON Text to read from input") >= 0 ) || ( e.getMessage().indexOf("input has trailing data after first JSON Text") >=0 ) || ( e.getMessage().indexOf("Unexpected character") >= 0 )) {
                 result.setError(true);
@@ -96,7 +96,7 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
                 log.warn(e.getMessage());
             }
 
-            result.setFailureMessage(errObj == null ? "" : errObj + e.getMessage());
+            result.setFailureMessage(errObj + e.getMessage());
             LogLevel level = e.getProcessingMessage().getLogLevel();
 
             if (level == LogLevel.ERROR) {
@@ -106,8 +106,8 @@ public class JSONSchemaAssertion extends AbstractTestElement implements Serializ
                 result.setFailure(true);
             }
             if (!result.isError() && !result.isFailure()) {
-                result.setFailure(true);
                 result.setFailureMessage("Something went wrong or something strange happened: " + e.getMessage());
+                result.setFailure(true);
             }
         }
     }

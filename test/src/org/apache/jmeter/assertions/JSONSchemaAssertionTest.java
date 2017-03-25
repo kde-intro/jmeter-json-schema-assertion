@@ -99,7 +99,7 @@ public class JSONSchemaAssertionTest extends JMeterTestCase {
         res = testlog();
         assertFalse(res.isError());
         assertTrue(res.isFailure());
-        assertTrue(res.getFailureMessage().indexOf("invalid JSON Schema, cannot continue") > 0);
+        assertTrue(res.getFailureMessage().indexOf("invalid JSON Schema, cannot continue") >= 0);
     }
 
     @Test // 4 - No File Name: Response - pass, Schema - no value of File Name
@@ -110,7 +110,7 @@ public class JSONSchemaAssertionTest extends JMeterTestCase {
         res = testlog();
         assertFalse(res.isError());
         assertTrue(res.isFailure());
-        assertTrue((res.getFailureMessage().indexOf(JSONSchemaAssertion.FILE_NAME_IS_REQUIRED) >= 0)|(res.getFailureMessage().indexOf(JSONSchemaAssertion.FILE_NAME_IS_REQUIRED) >= 0));
+        assertTrue(res.getFailureMessage().indexOf(JSONSchemaAssertion.FILE_NAME_IS_REQUIRED) >= 0);
     }
 
     @Test // 5 - No response result: Response - no response, Schema - pass

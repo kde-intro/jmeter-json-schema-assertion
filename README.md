@@ -264,6 +264,8 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 - [ ] Resolve (two) issues
 - [x] Add flag schema/response
 - [ ] Add textarea for a schema
+- [ ] Add schema validation by button
+
 
 ## Changelog
 **v0.1**, _06 mar 2017_
@@ -278,6 +280,7 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 
 
 ## Roadmap
+- [ ] Add schema generation (from/based on a responce)
 
 
 ## Troubleshooting

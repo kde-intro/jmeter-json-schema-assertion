@@ -280,7 +280,7 @@ rhino2.md5      = 3850097fb5c9aa1065cc198f1b82dcf1
 
 
 ## Roadmap
-- [ ] Add schema generation (from/based on a responce)
+- [ ] Add schema generation (from/based on a response)
 
 
 ## Troubleshooting
